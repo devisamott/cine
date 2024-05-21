@@ -6,11 +6,6 @@
     color: rgb(255, 108, 132);
     top: 100px;
 }
-.movie-list {
-    width: 100%;
-    margin: 0 auto;
-    overflow: hidden;
-}
 
 .container-movie-list {
     display: flex;

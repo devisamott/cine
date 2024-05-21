@@ -1,4 +1,3 @@
-import './App.css'
 import { MovieList } from '../src/movieList'
 import { Header } from './header'
 
