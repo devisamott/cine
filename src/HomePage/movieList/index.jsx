@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
-import { GetMovies } from "../getDataFromApi"
+import { GetMovies } from "../../getDataFromApi"
 import './movieList.css'
-
 
 export function MovieList () {
     const [movies, setMovies] = useState([])
@@ -9,6 +8,7 @@ export function MovieList () {
     useEffect(() => {
         dataMovies();
     }, []);
+    
     const dataMovies = async () => {
         const result = await GetMovies()
         setMovies(result)
