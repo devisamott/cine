@@ -2,7 +2,7 @@ import { useState } from "react";
 import './schedule.css'
 export function Schedules () {
     const [day, setDay] = useState(null)
-
+    const [hour, setHour] = useState(null)
     const schedules = {
         lunes: [
           "11:20 AM",
@@ -68,13 +68,24 @@ export function Schedules () {
         ],
       };
       
+    const handleDayClick = (day) => {
+      setDay(day);
+      setHour(null)
+    }
+
+    const handleTimeClick = (time) => {
+      setHour(time)
+      
+    }
+
       return(
         <div className="content-sidebar">
             <ul className="sidebar">
                 {Object.keys(schedules).map((dayOfWeek) => (
                     <li
                         key={dayOfWeek}
-                        onClick={() => setDay(dayOfWeek)}
+                        onClick={() => handleDayClick(dayOfWeek)}
+                        className={day === dayOfWeek ? 'selected' : ''}
                     >
                         {dayOfWeek}
                     </li>
@@ -86,6 +97,8 @@ export function Schedules () {
                         {schedules[day].map((time, index) => (
                             <li
                                 key={index}
+                                onClick={() => handleTimeClick(time)}
+                                className={hour === time ? 'selected' : ''}
                             >
                                 {time}
                             </li>
