@@ -67,6 +67,7 @@ export function Schedules () {
           "8:00 PM",
         ],
       };
+      
       return(
         <div className="content-sidebar">
             <ul className="sidebar">
