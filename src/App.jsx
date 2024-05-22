@@ -1,13 +1,16 @@
 // import { MovieList } from './HomePage/movieList';
-// import { Header } from './HomePage/header'
+import { Header } from './header'
 import { RenderChair } from './SecondPages/renderChair';
+import { Schedules } from './SecondPages/scheduleHeader';
 
 function App() {
   return (
     <>
-      {/* <Header />
-      <MovieList /> */}
+      <Header />
+      {/* <MovieList /> */}
+      <Schedules/>
       <RenderChair/>
+
     </>
   );
 }

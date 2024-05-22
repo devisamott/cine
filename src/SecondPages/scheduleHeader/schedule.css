@@ -1,0 +1,62 @@
+.sidebar {
+    list-style-type: none; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    color: rgb(70, 70, 70);
+    cursor: pointer;
+}
+.sidebar li {
+    display: flex;
+    position: relative;
+    margin-right: 10px;
+    top: 105px;
+    width: 100%;
+    height: 40px;
+    border: 1px solid pink;
+    justify-content: center; 
+    align-items: center;
+    border-radius: 30px;
+    box-shadow: 0 1px 8px rgb(206, 206, 206) ;
+
+}
+.sidebar li:hover {
+    background-color: rgb(250, 160, 175);
+
+}
+.schedule {
+    list-style-type: none;
+    top: 100px;
+    display: flex; 
+    position: relative;
+    justify-content: center; 
+    align-items: center;
+    color: rgb(70, 70, 70);
+
+}
+.schedule li {
+    display: flex;
+    position: relative;
+    justify-content: center; 
+    align-items: center;
+    margin-right: 10px;
+    width: 100px;
+    height:40px;
+    border: 1px solid pink;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 1px 8px rgb(252, 206, 206) ;
+}
+.schedule li:hover {
+    background-color: rgb(250, 160, 175);   
+
+}
+.selected {
+    background-color: rgb(255, 99, 125) ;
+    cursor:auto;
+}
+.selected:hover:not(:active){
+    background-color: rgb(255, 99, 125) ;   
+}
+  
+  
