@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { GetChair } from "../../getDataFromApi"
+import { GetChair } from "../../getDataFromApi/index"
 import { ChairSvg } from "../chairSvg";
 
 export function RenderChair () {
@@ -7,16 +7,16 @@ export function RenderChair () {
 
     useEffect(() => {
         dataChair()
-    })
+    },[])
     const dataChair = async () => {
-        const result = GetChair()
+        const result = await GetChair()
         setChair(result)
-    
     }
+    console.log(GetChair())
 
     return (
         <div>
-           {chair.map(({id}) => (
+           {chair?.map(({id}) => (
                 <div
                     key={id}
                 >

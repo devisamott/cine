@@ -1,5 +1,5 @@
 const jsonMovies = '../../src/HomePage/JsonMovies/movies.json'
-const jsonChairs = '../../cine/src/SecondPages/JsonChair/chair.json'
+const jsonChairs = '../../src/SecondPages/JsonChair/chair.json'
 
 
 export async function GetMovies () {
