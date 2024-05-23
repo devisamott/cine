@@ -5,6 +5,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import { Provider } from './provider';
 
 const router = createBrowserRouter ([
   {
@@ -18,10 +19,10 @@ const router = createBrowserRouter ([
 ])
 function App() {
   return (
-    <>
+    <Provider>
       <Header />
       <RouterProvider router={router}/>
-    </>
+    </Provider>
   );
 }
 
