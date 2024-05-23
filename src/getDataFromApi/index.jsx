@@ -8,6 +8,13 @@ export async function GetMovies () {
     return data;
 }
 
+export async function getIdFromMovie (idParam) {
+    const response = await fetch(jsonMovies)
+    const data = await response.json();
+    const getId = data.findIndex( ({id}) => id  === idParam);
+    return(data[getId]);
+}
+
 export async function GetChair () {
     const response = await fetch(jsonChairs)
     const data = await response.json();

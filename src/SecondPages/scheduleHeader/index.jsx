@@ -80,8 +80,7 @@ export function Schedules () {
 
     const handleTimeClick = (time) => {
       setHour(time)
-      handleScheduleSelection();
-      
+      handleScheduleSelection(day, time);
     }
 
       return(
