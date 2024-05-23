@@ -1,11 +1,11 @@
 import { MovieList } from './HomePage/movieList';
 import RenderSecondPage from './RenderSecondPages';
 import { Header } from './header'
+import { Provider } from './provider';
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import { Provider } from './provider';
 
 const router = createBrowserRouter ([
   {

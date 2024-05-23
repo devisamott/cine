@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import './schedule.css'
+import { DataContext } from "../../provider";
+
 export function Schedules () {
     const [day, setDay] = useState(null)
     const [hour, setHour] = useState(null)
+
+    const { handleScheduleSelection } = useContext(DataContext);
+    
     const schedules = {
         lunes: [
           "11:20 AM",
@@ -75,6 +80,7 @@ export function Schedules () {
 
     const handleTimeClick = (time) => {
       setHour(time)
+      handleScheduleSelection();
       
     }
 

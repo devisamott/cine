@@ -1,4 +1,4 @@
-export function ChairSvg({color}) {
+export function ChairSvg({ color }) {
 
     return (
         <svg

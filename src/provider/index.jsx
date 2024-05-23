@@ -1,13 +1,18 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
-const DataContext = createContext();
+export const DataContext = createContext();
 
-function  Provider ({ children }) {
+export function  Provider ({ children }) {
+    const [isScheduleSelected, setIsScheduleSelected] = useState(false);
 
+    const handleScheduleSelection = () => {
+        setIsScheduleSelected(true)
+    }
     return(
         <DataContext.Provider 
             value={{
-
+                handleScheduleSelection,
+                isScheduleSelected
             }}  
         >
             { children }
@@ -15,4 +20,3 @@ function  Provider ({ children }) {
     )
 }
 
-export { Provider, DataContext}

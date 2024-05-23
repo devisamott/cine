@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { GetChair } from "../../getDataFromApi/index"
 import { ChairSvg } from "../chairSvg";
+import { DataContext } from "../../provider";
 import './renderChair.css'
 
 export function RenderChair () {
     const [chair, setChair] = useState();
-    const [selectedChair, setSelectedChair] = useState(null)
+    const [selectedChair, setSelectedChair] = useState(new Set())
+
+    const { isScheduleSelected } = useContext(DataContext);
 
     useEffect(() => {
         dataChair()
@@ -17,6 +20,8 @@ export function RenderChair () {
     } 
 
     const  handleChairClick = (id) => {
+        if(!isScheduleSelected) return;
+
         setSelectedChair(prevSeletedChairs => {
             const newSelectedChairs = new Set(prevSeletedChairs);
             if(newSelectedChairs.has(id)){
@@ -27,7 +32,7 @@ export function RenderChair () {
             return newSelectedChairs;
         })
     }
-
+    
     return (
         <div className="container">
             <h2 className="counterChair">Sillas disponibles</h2>
@@ -37,7 +42,7 @@ export function RenderChair () {
                         key={id}
                         onClick={() => handleChairClick(id)}
                     >
-                        <ChairSvg  color={selectedChair.has(id) ? "#ffccd5" : "#fc9aab"}/>
+                        <ChairSvg  color={selectedChair.has(id) ? "#ffccd5" :(isScheduleSelected ? "#fc9aab": "#ccc") }/>
                     </div>
                 ))}
             </div>
