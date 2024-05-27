@@ -27,6 +27,7 @@ export function Provider({ children }) {
         return reservations;
     }
 
+
     const handleChairClick = (id) => {
         if (!isScheduleSelected) return;
 
