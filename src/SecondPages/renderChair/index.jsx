@@ -18,7 +18,7 @@ export function RenderChair () {
         const result = await GetChair()
         setChair(result)
     } 
-
+    
     const  handleChairClick = (id) => {
         if(!isScheduleSelected) return;
 

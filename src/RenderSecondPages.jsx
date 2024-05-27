@@ -1,6 +1,7 @@
 import { CleanButton } from "./SecondPages/cleanButton";
 import { ConfirmButton } from "./SecondPages/confirmButton";
 import { DaySelected } from "./SecondPages/daySelect";
+import { NameById } from "./SecondPages/nameById";
 import { RenderChair } from "./SecondPages/renderChair";
 import { ResevedChair } from "./SecondPages/reservedChairs";
 import { Home } from "./SecondPages/routeToHome";
@@ -14,6 +15,7 @@ function RenderSecondPage ( ) {
             <Home/>
             <Schedules/>
             <RenderChair/>
+            <NameById/>
             <DaySelected/>
             <ResevedChair/>
             <ConfirmButton />
