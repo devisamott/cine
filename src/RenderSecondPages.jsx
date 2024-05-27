@@ -8,6 +8,7 @@ import { Home } from "./SecondPages/routeToHome";
 import { Schedules } from "./SecondPages/scheduleHeader";
 import { Header } from "./header";
 
+
 function RenderSecondPage ( ) {
     return(
         <>
@@ -18,7 +19,7 @@ function RenderSecondPage ( ) {
             <NameById/>
             <DaySelected/>
             <ResevedChair/>
-            <ConfirmButton />
+            <ConfirmButton/>
             <CleanButton/>
         </>
     )

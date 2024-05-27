@@ -1,5 +1,6 @@
 import { MovieList } from './HomePage/movieList';
 import RenderSecondPage from './RenderSecondPages';
+import { ConfirmButton } from './SecondPages/confirmButton';
 import { Header } from './header'
 import { Provider } from './provider';
 import {

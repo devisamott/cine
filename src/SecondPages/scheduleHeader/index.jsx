@@ -1,12 +1,9 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import './schedule.css'
 import { DataContext } from "../../provider";
 
-export function Schedules () {
-    const [day, setDay] = useState(null)
-    const [hour, setHour] = useState(null)
-
-    const { handleScheduleSelection } = useContext(DataContext);
+export function Schedules() {
+    const { handleDayChange, handleTimeChange, day, hour } = useContext(DataContext);
     
     const schedules = {
         lunes: [
@@ -71,19 +68,17 @@ export function Schedules () {
           "5:50 PM",
           "8:00 PM",
         ],
-      };
-      
-    const handleDayClick = (day) => {
-      setDay(day);
-      setHour(null)
+    };
+    
+    const handleDayClick = (dayOfWeek) => {
+      handleDayChange(dayOfWeek);
     }
-
+    
     const handleTimeClick = (time) => {
-      setHour(time)
-      handleScheduleSelection(day, time);
+      handleTimeChange(time);
     }
 
-      return(
+    return (
         <div className="content-sidebar">
             <ul className="sidebar">
                 {Object.keys(schedules).map((dayOfWeek) => (
@@ -112,5 +107,5 @@ export function Schedules () {
                 </div>
             )}
         </div>
-      )
+    );
 }

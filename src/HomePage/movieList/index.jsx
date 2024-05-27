@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { Link } from 'react-router-dom';
 import { GetMovies } from '../../getDataFromApi/index';
 import './movieList.css'
+import { DataContext } from "../../provider";
 
 
 export function MovieList () {
     const [movies, setMovies] = useState([])
+    const { selectedDay, selectedHour } = useContext(DataContext);
 
     useEffect(() => {
         dataMovies();
@@ -15,7 +17,11 @@ export function MovieList () {
         setMovies(result)
     }
 
-
+    
+    const handleClick =() => {
+        selectedDay(null)
+        selectedHour(null)
+    }
     return (
         <div className='movie-list'>
             <h1 className='cartelera'>En cartelera</h1>
@@ -29,9 +35,10 @@ export function MovieList () {
                                 <Link
                                     to={`/reservation/${movie.id}`}
                                     className="link"
+                                    onClick={handleClick}
                                 >
                                 
-                                    <img src={movie.url} />
+                                    <img src={movie.url}/>
                                     <h2>{movie.name}</h2>
                                     <p>Director: {movie.director}</p>
                                     <p>Año: {movie.year}</p>
