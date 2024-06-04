@@ -7,7 +7,7 @@ import './renderChair.css';
 export function RenderChair() {
     const [chair, setChair] = useState([]);
 
-    const { isScheduleSelected, chairsReservations, handleChairClick, selectedDay, selectedHour } = useContext(DataContext);
+    const { isScheduleSelected, selectedHour, handleChairClick, chairSelecting, confirmedChairs, selectedDay } = useContext(DataContext);
 
     useEffect(() => {
         dataChair();
@@ -19,7 +19,24 @@ export function RenderChair() {
     };
 
     const isChairSelected = (id) => {
-        return chairsReservations[selectedDay]?.[selectedHour]?.[id] !== undefined;
+        return chairSelecting.includes(id);
+    };
+
+    const isChairConfirmed = (id) => {
+        return confirmedChairs.some(chair => chair.id === id && chair.day === selectedDay && chair.hour === selectedHour);
+    };
+
+    const getChairColor = (id) => {
+        if (!isScheduleSelected) {
+            return "#ddd";  
+        }
+        if (isChairSelected(id)) {
+            return "#fc9aab"; 
+        }
+        if (isChairConfirmed(id)) {
+            return "#fc9aab";  
+        }
+        return "#ffccd5"; 
     };
 
     return (
@@ -29,9 +46,9 @@ export function RenderChair() {
                 {chair?.map(({ id }) => (
                     <div
                         key={id}
-                        onClick={() => isScheduleSelected && handleChairClick(id)}
+                        onClick={() => isScheduleSelected && selectedHour && selectedDay && handleChairClick(id)}
                     >
-                        <ChairSvg color={isChairSelected(id) ? "#ffccd5" : (isScheduleSelected ? "#fc9aab" : "#ccc")} />
+                        <ChairSvg color={getChairColor(id)} />
                     </div>
                 ))}
             </div>

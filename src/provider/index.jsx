@@ -17,6 +17,7 @@ export function Provider({ children }) {
         setIsScheduleSelected(true);
         setSelectedDay(day);
         setSelectedHour(hour);
+        setChairSelecting([])
     };
 
     function markChairAsBussy(chairsReservation, day, hour, id) {
@@ -27,58 +28,80 @@ export function Provider({ children }) {
         return reservations;
     }
 
-
     const handleChairClick = (id) => {
-        if (!isScheduleSelected) return;
-
+        let newChairSelecting = [...chairSelecting];
         let reservationsCopy = { ...chairsReservations };
 
         if (reservationsCopy?.[selectedDay]?.[selectedHour]?.[id]) {
             delete reservationsCopy[selectedDay][selectedHour][id];
+            newChairSelecting = newChairSelecting.filter(chairId => chairId !== id);
         } else {
             reservationsCopy = markChairAsBussy(reservationsCopy, selectedDay, selectedHour, id);
+            newChairSelecting.push(id);
         }
 
         setChairsReservations(reservationsCopy);
-        setChairSelecting(Object.keys(reservationsCopy[selectedDay][selectedHour] || {}));
+        setChairSelecting(newChairSelecting);
     };
 
     const handleDayChange = (newDay) => {
         setDay(newDay);
-        setHour(null); 
-        setIsScheduleSelected(false); 
+        setHour(null);
+        setIsScheduleSelected(false);
+        setChairSelecting([]);
     };
 
     useEffect(() => {
-        if (chairsReservations && chairsReservations[day] && chairsReservations[day][hour]) {
-            setChairSelecting(Object.keys(chairsReservations[day][hour]));
+        if (chairsReservations[day] && chairsReservations[day][hour]) {
+            Object.keys(chairsReservations[day][hour]);
         } else {
             setChairSelecting([]);
         }
-    }, [day, hour, chairsReservations]);
+
+    }, []);
 
     const handleConfirm = () => {
-        setConfirmedChairs((prevState) => [...prevState, ...chairSelecting]);
+        setConfirmedChairs(prevConfirmedChairs => [
+            ...prevConfirmedChairs, 
+            ...chairSelecting.map(id => ({
+                id,
+                day: selectedDay,
+                hour: selectedHour
+            }))
+        ]);
+
+        const newReservations = { ...chairsReservations };
+        chairSelecting.forEach(id => {
+            newReservations[selectedDay][selectedHour][id] = id;
+        });
+
+        setChairsReservations(newReservations);
         setChairSelecting([]);
         setIsModalVisible(true);
     };
 
     const closeModal = () => {
-        setIsModalVisible(false); 
+        setIsModalVisible(false);
     };
 
     const handleTimeChange = (newTime) => {
         setHour(newTime);
         handleScheduleSelection(day, newTime);
-        setChairSelecting([]);
+        setChairSelecting([]);  // Limpiar selección de sillas
     };
 
     const clean = () => {
         const newReservation = { ...chairsReservations };
-        delete newReservation[day][hour];
-        
+        if (newReservation[day] && newReservation[day][hour]) {
+            delete newReservation[day][hour];
+        }
+
         setChairSelecting([]);
         setChairsReservations(newReservation);
+
+        const newConfirmedChairs = confirmedChairs.filter(chair => 
+            !(chair.day === day && chair.hour === hour));
+        setConfirmedChairs(newConfirmedChairs);
     };
 
     return (
@@ -101,7 +124,8 @@ export function Provider({ children }) {
                 confirmedChairs,
                 isModalVisible,
                 closeModal,
-                clean
+                clean,
+                setConfirmedChairs
             }}
         >
             {children}
