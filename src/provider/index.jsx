@@ -17,7 +17,6 @@ export function Provider({ children }) {
         setIsScheduleSelected(true);
         setSelectedDay(day);
         setSelectedHour(hour);
-        setChairSelecting([])
     };
 
     function markChairAsBussy(chairsReservation, day, hour, id) {
@@ -58,7 +57,7 @@ export function Provider({ children }) {
             setChairSelecting([]);
         }
 
-    }, []);
+    }, [day, hour, chairsReservations]);
 
     const handleConfirm = () => {
         setConfirmedChairs(prevConfirmedChairs => [
@@ -87,7 +86,6 @@ export function Provider({ children }) {
     const handleTimeChange = (newTime) => {
         setHour(newTime);
         handleScheduleSelection(day, newTime);
-        setChairSelecting([]);  // Limpiar selección de sillas
     };
 
     const clean = () => {
@@ -95,9 +93,9 @@ export function Provider({ children }) {
         if (newReservation[day] && newReservation[day][hour]) {
             delete newReservation[day][hour];
         }
+        setChairsReservations(newReservation);
 
         setChairSelecting([]);
-        setChairsReservations(newReservation);
 
         const newConfirmedChairs = confirmedChairs.filter(chair => 
             !(chair.day === day && chair.hour === hour));
